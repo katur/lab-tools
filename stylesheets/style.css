@@ -1,0 +1,334 @@
+img.jessica {
+	width: 200px;
+	margin: 20px;
+}
+
+/* ~~~~~~~~ GLOBAL STYLES ~~~~~~~~ */
+
+body {
+	background: #000;
+	font-size: 14px;
+	font-family: Helvetica, Arial, Sans-Serif;
+}
+
+div#content {
+	background: #FDD;
+	width: 960px;
+	min-height: 500px;
+	margin: 0 auto;
+	margin-top: 30px;
+	padding: 20px;
+	overflow: auto;
+}
+
+h1 {
+	width: 100%;
+	font-size: 18px;
+	text-align: center;
+}
+
+h1.detail {
+	color: #666;
+	font-size: 13px;
+	font-style: normal;
+}
+
+h2 {
+	font-size: 16px;
+}
+
+a {
+	color: #000;
+	text-decoration: underline;
+}
+
+a:hover {
+	color: #624560;
+}
+
+td {
+	margin: 0;
+    padding: 6px;
+}
+
+.invisible {
+	display: none;
+}
+
+
+/* ~~~~~~~~ TOP BAR ~~~~~~~~ */
+
+div#topBar {
+	text-align: right;
+	clear: both;
+	margin: 0 0 20px 0;
+}
+
+div#topBarLeft {
+	float: left;
+}
+
+div#topBarRight {
+	float: right;
+}
+
+
+
+/* ~~~~~~~~ LOGIN TABLE (ON INDEX PAGE) ~~~~~~~~ */
+
+form#login {
+	width: 360px;
+}
+
+td.loginLabel {
+	width: 69px;
+}
+
+input.loginInput {
+	width: 150px;
+}
+
+
+
+/* ~~~~~~~~ STRAINS PAGE ~~~~~~~~ */
+
+div#contentStrains {
+	background: #FDD;
+	margin: 30px;
+	padding: 40px;
+}
+
+table#strains {
+	width: 100%;
+	margin: 20px 0 0 0;
+	background: #EEE;
+	border: solid #AAA;
+	border-width: 0 0 1px 1px;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+table#strains td {
+    border: solid #AAA;
+    border-width: 1px 1px 0 0;
+}
+
+tr.topRow {
+	font-size: 15px;
+	font-weight: bold;
+	background: #F93;
+	text-align: center;
+}
+
+
+
+/* ~~~~~~~~ STRAIN PAGE ~~~~~~~~ */
+
+div#strainName {
+	float: left;
+	clear: both;
+	background: #F93;
+	border: solid #AAA;
+	border-width: 0px 0px 1px 0px;
+	width: 760px;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	padding: 10px 0px;
+}
+
+div#strainContainer {
+	float: left;
+	clear: both;
+	background: #EEE;
+	border: 1px solid #AAA;
+	width: 760px;
+	margin: 20px 100px;
+}
+
+div.strainSection {
+	float: left;
+	clear: both;
+	width: 100%;
+	margin: 10px 0px;
+}
+
+div.strainSection h2 {
+	color: #777;
+	font-size: 18px;
+	text-align: center;
+}
+
+div.strainData {
+	float: left;
+	margin: 10px 30px 10px 30px;
+}
+
+div.line {
+	float: left;
+	clear: both;
+	background: #AAA;
+	height: 1px;
+	width: 660px;
+	margin: 10px 50px;
+}
+
+
+/* ~~~~~~~~ STAMP VISUALIZATION ~~~~~~~~ */
+
+div.status0 {
+	background: #57492C;
+/*	background: #000; */
+}
+
+div.status1 {
+	background: #D5AA02;
+/*	background: #DD457C; */
+}
+
+div.status2 {
+	background: #4B2;
+}
+
+div#hoverClone {
+	position: fixed;
+	bottom: 0px;
+	right: 0px;
+	background: #DDD;
+	border: 1px solid #AAA;
+	padding: 5px;
+	display: none;
+}
+
+/* ~~~~~~~~ STAMP VISUALIZATION: LARGE SIZE (LIBRARY_VIEW) ~~~~~~~~ */
+
+div.plate {
+	width: 684px;
+	height: 456px;
+/*	background: #DDD; */
+	background: #57492C;
+	border: 5px solid #F93;
+	margin: 0 auto;
+}
+
+div.well {
+	float: left;
+/*	border: 1px solid #666; */
+	border: 1px solid #57492C; 
+	width: 45px;
+	height: 45px;
+	margin: 5px;
+	color: #DDD;
+}
+
+/* ~~~~~~~~ STAMP VISUALIZATION: SMALL SIZE (PLATE_RECORDS) ~~~~~~~~ */
+
+div.plateRow {
+	float: left;
+	clear: both;
+}
+
+
+div.plateWrap {
+	text-align: center;
+	width: 372px;
+	float: left;
+	margin-left: 72px;
+}
+
+div.plateSmall {
+	width: 372px;
+	height: 248px;
+/*	background: #DDD; */
+	background: #57492C;
+	border: 5px solid #F93;
+}
+
+div.wellSmall {
+	float: left;
+/*	border: 1px solid #666; */
+/*	border: 1px solid #000; */
+	border: 1px solid #57492C;
+	width: 25px;
+	height: 25px;
+	margin: 2px;
+	color: #EEE;
+	font-size: 12px;	
+}
+
+div.badMatch {
+	color: #F00;
+}
+
+div.comments {
+	text-align: left;
+	font-size: 12px;
+}
+
+/* ~~~~~~~~ STAMP VISUALIZATION: MEDIUM SIZE (NEW_STAMP) ~~~~~~~~ */
+
+div.plateMedium {
+	width: 636px;
+	height: 368px;
+/*	background: #DDD; */
+	background: #57492C;
+	border: 5px solid #F93;
+	margin: 0 auto;
+}
+
+div.wellMedium {
+	float: left;
+/*	border: 1px solid #666; */
+	border: 1px solid #57492C; 
+	width: 40px;
+	height: 40px;
+	margin: 2px;
+	color: #DDD;
+}
+
+/* ~~~~~~~~ NEW_STAMP PAGE ~~~~~~~~ */
+
+div.commentButton {
+	float: left;
+	border: 1px solid #666;
+	width: 5px;
+	height: 5px;
+	background: #000;
+}
+
+div.commentPopup {
+	position: absolute;
+	background: #DDD;
+	border: 1px solid #AAA;
+	padding: 5px;
+	display: none;
+}
+
+
+/* ~~~~~~~ STORAGE ~~~~~~~~~~ */
+
+div#storage_vat img {
+	
+}
+
+div.vatImage {
+	float: left;
+	padding: 20px;
+}
+
+div#storage_rack {
+
+}
+
+div#storage table {
+	width: 800px;
+	margin-left: 70px;
+}
+
+div #storage td {
+	border: solid;
+	background: #FFF;
+}
+
+
+
