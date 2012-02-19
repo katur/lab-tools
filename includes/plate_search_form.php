@@ -1,4 +1,4 @@
-<!-- Copyright (c) 2011 Katherine Erickson -->
+<!-- Copyright (c) 2010-2012 Katherine Erickson -->
 
 <form method="GET" action="/GIlibrary/plate_records.php">
 	Search to view growth history of an RNAi plate:&nbsp;

@@ -4,6 +4,8 @@ $(function(){
 	commentPopup();
 });
 
+$(".chzn-select").chosen();
+
 // on the plate_records and library_view pages, when hovered over a well, fade in the div (lower right screen) with the clone and gene
 function hoverClone(){
 	if ($('body#plate_records, body#library_view').length==1) {

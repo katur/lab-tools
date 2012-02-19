@@ -1,6 +1,6 @@
 <?php
-	include ('connect.php');
-	include ('../includes/functions.php');
+	include('connect.php');
+	include('../includes/functions.php');
 	
 	$currentTransgeneNumber = '132';
 	
@@ -43,7 +43,4 @@
 		
 		$currentTransgeneNumber++;
 	}
-	
-	
-	
 ?>

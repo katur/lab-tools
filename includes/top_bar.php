@@ -1,4 +1,4 @@
-<!-- Copyright (c) 2011 Katherine Erickson -->
+<!-- Copyright (c) 2010-2012 Katherine Erickson -->
 
 <div id="topBar">
 	<?php
@@ -11,6 +11,6 @@
 		<?php
 			echo $_SESSION["logged_in"];
 			?>
-		&nbsp;&nbsp;&nbsp;<a href="/api/logout.php">Logout</a>
+		&nbsp;&nbsp;&nbsp;<a href="/backend/logout.php">Logout</a>
 	</div>
 </div>

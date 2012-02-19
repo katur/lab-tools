@@ -1,23 +1,13 @@
-<?php
-  // Copyright (c) 2011 Katherine Erickson
-  include ('../includes/global.php');
-?>
+<!-- Copyright (c) 2010-2012 Katherine Erickson -->
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-	<head>
-		<title>RNAi Library Records</title>
-
-		<link rel="stylesheet" type="text/css" href="../stylesheets/style.css">
-
-		<script type="text/javascript" src="../js/jquery.js"></script>
-		<script type="text/javascript" src="../js/javascript.js"></script>
-	</head>
+	<?php include("../includes/head.php"); ?>
 	<body id='library_view'>
 		<div id='content'>
 			<?php
-				include ("../includes/top_bar.php");
-				include ("../includes/library_search_form.php");
+				include("../includes/top_bar.php");
+				include("../includes/library_search_form.php");
 				
 				if (mysql_real_escape_string($_GET["search_term"])) {
 					$search_term = mysql_real_escape_string($_GET["search_term"]);
@@ -82,7 +72,7 @@
 						<div id='hoverClone'></div>
 						";
 					} else {
-						echo "<h1>Sorry; no plate matched your query!</h1><br><img src='./images/sad-puppy.jpg' style='margin-left:280px'>";
+						echo "<h1>Sorry; no plate matched your query!</h1><br><img src='../images/sad-puppy.jpg' style='margin-left:280px'>";
 					}
 				}
 			?>

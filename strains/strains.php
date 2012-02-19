@@ -1,23 +1,14 @@
-<!-- Copyright (c) 2011 Katherine Erickson -->
-
-<?php include ('../includes/global.php'); ?>
+<!-- Copyright (c) 2010-2012 Katherine Erickson -->
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-	<head>
-		<title>Gunsiano Strain Database</title>
-
-		<link rel="stylesheet" type="text/css" href="../stylesheets/style.css">
-
-		<script type="text/javascript" src="../js/jquery.js"></script>
-		<script type="text/javascript" src="../js/javascript.js"></script>
-	</head>
+	<?php include("../includes/head.php"); ?>
 	<body id='strains'>		
 		<div id="contentStrains">
 			<?php
 				// include the top bar and the search form at top of page
-				include ("../includes/top_bar.php");
-				include ("../includes/strain_search_form.php");
+				include("../includes/top_bar.php");
+				include("../includes/strain_search_form.php");
 			?>
 			<table id="strains">
 				<tr class="topRow">

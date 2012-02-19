@@ -1,15 +1,8 @@
-<!-- Copyright (c) 2011 Katherine Erickson -->
-
-<?php include ('../includes/global.php'); ?>
+<!-- Copyright (c) 2010-2012 Katherine Erickson -->
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-	<head>
-		<title>Piano Lab Storage</title>
-		<link rel="stylesheet" type="text/css" href="../stylesheets/style.css">
-		<script type="text/javascript" src="../js/jquery.js"></script>
-		<script type="text/javascript" src="../js/javascript.js"></script>
-	</head>
+	<?php include("../includes/head.php"); ?>
 	<body>
 		<div id='content'>	
 			<?php

@@ -1,22 +1,12 @@
-<?php
-  // Copyright (c) 2011 Katherine Erickson
-  include ('../includes/global.php');
-?>
+<!-- Copyright (c) 2010-2012 Katherine Erickson -->
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-	<head>
-		<title>RNAi Library Records</title>
-
-		<link rel="stylesheet" type="text/css" href="../stylesheets/style.css">
-
-		<script type="text/javascript" src="../js/jquery.js"></script>
-		<script type="text/javascript" src="../js/javascript.js"></script>
-	</head>
+	<?php include("../includes/head.php"); ?>
 	<body id='plate_records'>
 		<div id='content'>
 			<?php
-				include ("../includes/top_bar.php");
+				include("../includes/top_bar.php");
 				echo "<h1>Stamps from 06/17/2011</h1>";
 				$query = "SELECT DISTINCT stamps.plate_id
 					FROM stamps

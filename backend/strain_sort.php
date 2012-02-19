@@ -1,6 +1,6 @@
 <?php
-	include ('connect.php');
-	include ('../includes/functions.php');
+	include('connect.php');
+	include('../includes/functions.php');
 	
 	$query = "SELECT strain FROM strains";
 	

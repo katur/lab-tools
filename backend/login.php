@@ -1,8 +1,5 @@
 <?php
-	// conect to the db //
 	include('connect.php');
-	
-	// start a session //
 	session_start();
 	
 	// GET the login credentials from the URL //

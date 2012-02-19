@@ -1,22 +1,13 @@
-<!-- Copyright (c) 2011 Katherine Erickson -->
-
-<?php include ('../includes/global.php'); ?>
+<!-- Copyright (c) 2010-2012 Katherine Erickson -->
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-	<head>
-		<title>Gunsiano Strain Database</title>
-
-		<link rel="stylesheet" type="text/css" href="../stylesheets/style.css">
-
-		<script type="text/javascript" src="../js/jquery.js"></script>
-		<script type="text/javascript" src="../js/javascript.js"></script>
-	</head>
+	<?php include("../includes/head.php"); ?>
 	<body id='strain'>
 		<div id="content">
 			<?php
-				include ("../includes/top_bar.php");
-				include ("../includes/strain_search_form.php");
+				include("../includes/top_bar.php");
+				include("../includes/strain_search_form.php");
 			
 				// get the strain name from the URL
 				$strain = mysql_real_escape_string($_GET["strain"]);

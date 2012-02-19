@@ -1,4 +1,4 @@
-<!-- Copyright (c) 2011 Katherine Erickson -->
+<!-- Copyright (c) 2010-2012 Katherine Erickson -->
 
 <form method="GET" action="/strains/strains.php">
 	Search Strain Database:&nbsp;

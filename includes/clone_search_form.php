@@ -1,4 +1,4 @@
-<!-- Copyright (c) 2011 Katherine Erickson -->
+<!-- Copyright (c) 2010-2012 Katherine Erickson -->
 
 <form method="GET" action="/GIlibrary/library_view_clone.php">
 	Search to view location of a clone (96-well format):&nbsp;

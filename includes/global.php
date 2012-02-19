@@ -1,9 +1,10 @@
+<!-- Copyright (c) 2010-2012 Katherine Erickson -->
+
 <?php
-  // Copyright (c) 2011 Katherine Erickson
-	include ("../api/connect.php");
-	include ("functions.php");
 	session_start();
 	if (!$_SESSION["logged_in"]) {
 		header("location: /");
 	}
+	include("functions.php");
+	include($_SERVER["DOCUMENT_ROOT"] . "/backend/connect.php");
 ?>

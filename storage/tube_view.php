@@ -1,18 +1,12 @@
-<!-- Copyright (c) 2011 Katherine Erickson -->
+<!-- Copyright (c) 2010-2012 Katherine Erickson -->
 
-<?php include ('../includes/global.php'); ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-	<head>
-		<title>Piano Lab Storage</title>
-		<link rel="stylesheet" type="text/css" href="../stylesheets/style.css">
-		<script type="text/javascript" src="../js/jquery.js"></script>
-		<script type="text/javascript" src="../js/javascript.js"></script>
-	</head>
+	<?php include("../includes/head.php"); ?>
 	<body id='storage'>
 		<div id='content'>
 			<?php
-				include ("../includes/top_bar.php");				
+				include("../includes/top_bar.php");				
 				echo "<div id='storage'>";				
 					echo "<div id='tube_view'>";					
 						$box_id = mysql_real_escape_string($_GET["box_id"]);

@@ -4,7 +4,7 @@
 		$host = "localhost";
 		$username = "root";
 		$password = "root";
-		$database = "nyu_lauraerickson1_site_aplus_net";
+		$database = "PianoLab";
 	} else {
 		$host = "sql5c40a.carrierzone.com";
 		$username = "lauraerick614155";
