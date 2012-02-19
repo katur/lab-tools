@@ -13,7 +13,8 @@
 	$query = "SELECT *
 		FROM users
 		WHERE username = '$username' AND password = SHA1('$password')
-		LIMIT 1";
+		LIMIT 1
+	";
 
 	// Run the query //	
 	$result = mysql_query($query);

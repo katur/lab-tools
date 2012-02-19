@@ -1,9 +1,10 @@
+<!-- Copyright (c) 2011 Katherine Erickson -->
+
 <?php
 	include ('./api/connect.php');
 	include ('./includes/functions.php');
 	session_start();
 ?>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 	<head>
@@ -59,12 +60,12 @@
 				// otherwise, i.e. if session variable 'logged in' IS present, allow user to search strain DB, view all strains, or search RNAi plates.  If admin, allow to add new strain or new RNAi stamp data. //
 				} else {
 					echo "<h2>Worm Strain Database</h2>";
-					include ("includes/search_form.php");
-					echo "<br><a href='./strains.php'>View all strains</a>";
+					include ("includes/strain_search_form.php");
+					echo "<br><a href='/strains/strains.php'>View all strains</a>";
 					
-					if ($_SESSION["admin"] == 1) {
-						echo "<br><br><a href='/new_strain.php'>Add new strain</a>";
-					}
+//					if ($_SESSION["admin"] == 1) {
+//						echo "<br><br><a href='/strains/new_strain.php'>Add new strain</a>";
+//					}
 					
 					echo "<br><br><br><h2>RNAi Library Database</h2>";
 					include ("./includes/library_search_form.php");
@@ -76,9 +77,8 @@
 					}
 					
 					echo "<br><br><h2>Freezer Storage Database</h2>
-						<br><a href='/vat_view.php'>View Storage Vats</a>
+						<br><a href='/storage/vat_view.php'>View Storage Vats</a>
 					";
-					
 				}
 			?>
 		</div>

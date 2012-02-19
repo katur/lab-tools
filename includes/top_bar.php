@@ -1,7 +1,9 @@
+<!-- Copyright (c) 2011 Katherine Erickson -->
+
 <div id="topBar">
 	<?php
 		if ($_SERVER["PHP_SELF"] != "/index.php") {
-			echo '<div id="topBarLeft"><a href="./index.php">Home</a></div>';
+			echo '<div id="topBarLeft"><a href="/index.php">Home</a></div>';
 		} 
 	?>
 	<div id="topBarRight">

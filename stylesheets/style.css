@@ -1,3 +1,10 @@
+/* Copyright (c) 2011 Katherine Erickson */
+
+img {
+border: 0 none;
+  }
+
+
 img.jessica {
 	width: 200px;
 	margin: 20px;
@@ -6,13 +13,14 @@ img.jessica {
 /* ~~~~~~~~ GLOBAL STYLES ~~~~~~~~ */
 
 body {
-	background: #000;
-	font-size: 14px;
+	background: #DBDB00;
+	font-size: 16px;
 	font-family: Helvetica, Arial, Sans-Serif;
+	color: #140D14;
 }
 
 div#content {
-	background: #FDD;
+	background: #DBDB00;
 	width: 960px;
 	min-height: 500px;
 	margin: 0 auto;
@@ -23,7 +31,8 @@ div#content {
 
 h1 {
 	width: 100%;
-	font-size: 18px;
+	font-size: 22px;
+	color: #624560;
 	text-align: center;
 }
 
@@ -35,15 +44,21 @@ h1.detail {
 
 h2 {
 	font-size: 16px;
+	color: #635335;
 }
 
 a {
-	color: #000;
+	color: #140D14;
 	text-decoration: underline;
 }
 
 a:hover {
 	color: #624560;
+}
+
+table, tr, td {
+	border-color: #140D14;
+	border-collapse: collapse;
 }
 
 td {
@@ -93,7 +108,7 @@ input.loginInput {
 /* ~~~~~~~~ STRAINS PAGE ~~~~~~~~ */
 
 div#contentStrains {
-	background: #FDD;
+	background: #DBDB00;
 	margin: 30px;
 	padding: 40px;
 }
@@ -101,7 +116,7 @@ div#contentStrains {
 table#strains {
 	width: 100%;
 	margin: 20px 0 0 0;
-	background: #EEE;
+	background: #FFF;
 	border: solid #AAA;
 	border-width: 0 0 1px 1px;
     border-spacing: 0;
@@ -140,7 +155,7 @@ div#strainName {
 div#strainContainer {
 	float: left;
 	clear: both;
-	background: #EEE;
+	background: #FFF;
 	border: 1px solid #AAA;
 	width: 760px;
 	margin: 20px 100px;
@@ -177,13 +192,12 @@ div.line {
 /* ~~~~~~~~ STAMP VISUALIZATION ~~~~~~~~ */
 
 div.status0 {
-	background: #57492C;
-/*	background: #000; */
+	/*background: #57492C;*/
+	background: #635335;
 }
 
 div.status1 {
 	background: #D5AA02;
-/*	background: #DD457C; */
 }
 
 div.status2 {
@@ -205,16 +219,14 @@ div#hoverClone {
 div.plate {
 	width: 684px;
 	height: 456px;
-/*	background: #DDD; */
-	background: #57492C;
+	background: #635335;
 	border: 5px solid #F93;
 	margin: 0 auto;
 }
 
 div.well {
 	float: left;
-/*	border: 1px solid #666; */
-	border: 1px solid #57492C; 
+	border: 1px solid #635335; 
 	width: 45px;
 	height: 45px;
 	margin: 5px;
@@ -239,16 +251,13 @@ div.plateWrap {
 div.plateSmall {
 	width: 372px;
 	height: 248px;
-/*	background: #DDD; */
-	background: #57492C;
+	background: #635335;
 	border: 5px solid #F93;
 }
 
 div.wellSmall {
 	float: left;
-/*	border: 1px solid #666; */
-/*	border: 1px solid #000; */
-	border: 1px solid #57492C;
+	border: 1px solid #635335;
 	width: 25px;
 	height: 25px;
 	margin: 2px;
@@ -270,16 +279,14 @@ div.comments {
 div.plateMedium {
 	width: 636px;
 	height: 368px;
-/*	background: #DDD; */
-	background: #57492C;
+	background: #635335;
 	border: 5px solid #F93;
 	margin: 0 auto;
 }
 
 div.wellMedium {
 	float: left;
-/*	border: 1px solid #666; */
-	border: 1px solid #57492C; 
+	border: 1px solid #635335; 
 	width: 40px;
 	height: 40px;
 	margin: 2px;
@@ -307,17 +314,35 @@ div.commentPopup {
 
 /* ~~~~~~~ STORAGE ~~~~~~~~~~ */
 
-div#storage_vat img {
-	
-}
-
 div.vatImage {
 	float: left;
 	padding: 20px;
 }
 
-div#storage_rack {
+div#rack_view table, div#box_view table, div#vat_view table, div#tube_view table {
+	text-align: center;
+	margin: 20px 0 0 0;
+	background: #FFF;
+	border: solid #AAA;
+	border-width: 0 0 1px 1px;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
 
+div#storage td {
+    border: solid #AAA;
+    border-width: 1px 1px 0 0;
+}
+
+td.wholeLink {
+	padding: 0;
+}
+
+div#rack_view table a, div#box_view table a, div#vat_view table a {
+	display: block;
+	width: 100%;
+	height: 100%;
+	padding: 6px 0;
 }
 
 div#storage table {
@@ -325,10 +350,24 @@ div#storage table {
 	margin-left: 70px;
 }
 
-div #storage td {
-	border: solid;
-	background: #FFF;
+
+div#storage a {
+	text-decoration: none;
 }
 
+div#mom {
+	background: #F00;
+	width: 960px;
+	margin: 0 auto;
+	overflow: auto;
+}
 
+div#mom img {
+	margin-left: 80px;
+}
 
+div#mom h1 {
+	color: #59FF04;
+	font-size: 45px;
+	padding-top: 20px;
+}

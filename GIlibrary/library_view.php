@@ -1,27 +1,31 @@
-<?php include ('./includes/global.php'); ?>
+<?php
+  // Copyright (c) 2011 Katherine Erickson
+  include ('../includes/global.php');
+?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 	<head>
 		<title>RNAi Library Records</title>
 
-		<link rel="stylesheet" type="text/css" href="./stylesheets/style.css">
+		<link rel="stylesheet" type="text/css" href="../stylesheets/style.css">
 
-		<script type="text/javascript" src="./js/jquery.js"></script>
-		<script type="text/javascript" src="./js/javascript.js"></script>
+		<script type="text/javascript" src="../js/jquery.js"></script>
+		<script type="text/javascript" src="../js/javascript.js"></script>
 	</head>
 	<body id='library_view'>
 		<div id='content'>
 			<?php
-				include ("./includes/top_bar.php");
-				include ("./includes/library_search_form.php");
+				include ("../includes/top_bar.php");
+				include ("../includes/library_search_form.php");
 				
 				if ($_GET["search_term"]) {
 					$search_term = $_GET["search_term"];
 					$query = "SELECT library.plate_id
 						FROM library
 						WHERE library.plate_id = '$search_term'
-						LIMIT 1";
+						LIMIT 1
+					";
 
 					$result = mysql_query($query);
 					
@@ -45,7 +49,8 @@
 						$query = "SELECT library.well_position, library.clone, library.gene
 							FROM library
 							WHERE library.plate_id = '$search_term'
-							ORDER BY library.well_position";
+							ORDER BY library.well_position
+						";
 
 						$result = mysql_query($query);
 						

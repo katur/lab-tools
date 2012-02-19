@@ -8,7 +8,7 @@
 	} else {
 		$host = "sql5c40a.carrierzone.com";
 		$username = "lauraerick614155";
-		$password = "shaniatrain";
+		$password = "shellwax36";
 		$database = "nyu_lauraerickson1_site_aplus_net";
 	}
 

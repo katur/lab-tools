@@ -1,3 +1,5 @@
+<!-- Copyright (c) 2011 Katherine Erickson -->
+
 <?php
 	include ('api/connect.php');
 	include ('includes/functions.php');

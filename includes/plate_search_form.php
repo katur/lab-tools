@@ -1,4 +1,6 @@
-<form method="GET" action="./plate_records.php">
+<!-- Copyright (c) 2011 Katherine Erickson -->
+
+<form method="GET" action="/GIlibrary/plate_records.php">
 	Search to view growth history of an RNAi plate:&nbsp;
 	<input type="text" name="search_term" value="<?php echo $_GET['search_term']; ?>"></input>
 	<input type="submit" value="Search"></input>

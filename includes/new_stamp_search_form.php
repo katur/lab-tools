@@ -1,4 +1,6 @@
-<form method="GET" action="./new_stamp.php">
+<!-- Copyright (c) 2011 Katherine Erickson -->
+
+<form method="GET" action="/GIlibrary/new_stamp.php">
 	Add new RNAi library stamp data:&nbsp;
 	<input type="text" name="search_term" value="<?php echo $_GET['search_term']; ?>"></input>
 	<input type="submit" value="Find Template"></input>

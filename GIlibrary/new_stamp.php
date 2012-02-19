@@ -1,20 +1,23 @@
-<?php include ('./includes/global.php'); ?>
+<?php
+  // Copyright (c) 2011 Katherine Erickson
+  include ('../includes/global.php');
+?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 	<head>
 		<title>Add New Stamp Data To RNAi Library Records</title>
 
-		<link rel="stylesheet" type="text/css" href="./stylesheets/style.css">
+		<link rel="stylesheet" type="text/css" href="../stylesheets/style.css">
 
-		<script type="text/javascript" src="./js/jquery.js"></script>
-		<script type="text/javascript" src="./js/javascript.js"></script>
+		<script type="text/javascript" src="../js/jquery.js"></script>
+		<script type="text/javascript" src="../js/javascript.js"></script>
 	</head>
 	<body id='new_stamp'>
 		<div id='content'>
 			<?php
-				include ("./includes/top_bar.php");
-				include ("./includes/new_stamp_search_form.php");
+				include ("../includes/top_bar.php");
+				include ("../includes/new_stamp_search_form.php");
 				
 				if ($_GET["date"]) {
 					$date = $_GET["date"];
@@ -25,7 +28,8 @@
 					$query = "SELECT library.plate_id
 						FROM library
 						WHERE library.plate_id = '$search_term'
-						LIMIT 1";
+						LIMIT 1
+					";
 
 					$result = mysql_query($query);
 					
@@ -47,7 +51,7 @@
 						echo "
 							<h1 class='detail'>(Click well to change status)</h1>
 							
-							<form method='POST' action='/process_stamp.php'>
+							<form method='POST' action='/GIlibrary/process_stamp.php'>
 								<input class='invisible' type='text' name='plate_id' value='$plate_id'></input>
 								
 								Date:&nbsp;<input type='text' name='date' value='$date'></input>
@@ -62,6 +66,10 @@
 										<option value='6'>Original 384</option>
 										<option value='7'>Julie copy 1</option>
 										<option value='8'>Julie copy 2</option>
+										<option value='11'>Fitch384</option>
+										<option value='12'>Hubbard384</option>
+										<option value='10'>from Eliana's frozens (from Fitch)</option>
+										<option value='13'>from S/K's frozens (from Fitch/Hubbard combo)</option>
 									</select>
 								
 								<br><span style='color: #666; font-size: 13px;'>(in format YYYYMMDD)</span>
@@ -72,7 +80,8 @@
 						$query = "SELECT library.well_position, library.clone
 							FROM library
 							WHERE library.plate_id = '$search_term'
-							ORDER BY library.well_position";
+							ORDER BY library.well_position
+						";
 
 						$result = mysql_query($query);
 						
@@ -81,7 +90,7 @@
 							exit;
 						}
 
-						while ($row=mysql_fetch_assoc($result)) {
+						while ($row = mysql_fetch_assoc($result)) {
 							$well_position = $row['well_position'];
 							$clone = $row['clone'];
 							if ($clone == NULL) {

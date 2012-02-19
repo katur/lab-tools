@@ -1,5 +1,6 @@
-<?php 
-	include ('./includes/global.php');
+<?php
+  // Copyright (c) 2011 Katherine Erickson
+  include ('../includes/global.php');
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
@@ -7,23 +8,24 @@
 	<head>
 		<title>RNAi Library Records</title>
 
-		<link rel="stylesheet" type="text/css" href="./stylesheets/style.css">
+		<link rel="stylesheet" type="text/css" href="../stylesheets/style.css">
 
-		<script type="text/javascript" src="./js/jquery.js"></script>
-		<script type="text/javascript" src="./js/javascript.js"></script>
+		<script type="text/javascript" src="../js/jquery.js"></script>
+		<script type="text/javascript" src="../js/javascript.js"></script>
 	</head>
 	<body id='plate_records'>
 		<div id='content'>
 			<?php
-				include ("./includes/top_bar.php");
-				include ("./includes/plate_search_form.php");
+				include ("../includes/top_bar.php");
+				include ("../includes/plate_search_form.php");
 				
 				if ($_GET["search_term"]) {
 					$search_term = $_GET["search_term"];
 					$query = "SELECT library.plate_id
 						FROM library
 						WHERE library.plate_id = '$search_term'
-						LIMIT 1";
+						LIMIT 1
+					";
 
 					$result = mysql_query($query);
 					
@@ -36,7 +38,7 @@
 					if (mysql_num_rows($result) != 0) {
 						
 						//create title as plate_id name
-						while ($row=mysql_fetch_assoc($result)) {
+						while ($row = mysql_fetch_assoc($result)) {
 							$plate_id = $row['plate_id'];
 							if (preg_match("/-/", $plate_id)) {
 								echo "<h1>$plate_id</h1>";
@@ -50,7 +52,8 @@
 						$query = "SELECT library.well_position, library.clone, library.gene
 							FROM library
 							WHERE library.plate_id = '$search_term'
-							ORDER BY library.well_position";
+							ORDER BY library.well_position
+						";
 
 						$result = mysql_query($query);
 						
@@ -97,9 +100,10 @@
 						$query = "SELECT DISTINCT stamps.date, stamps.plate_id, stamps.source_id, stamp_source.source
 							FROM stamps
 							LEFT JOIN stamp_source
-							ON stamp_source.source_id = stamps.source_id
+							ON stamp_source.id = stamps.source_id
 							WHERE stamps.plate_id = '$search_term'
-							ORDER BY stamps.date";
+							ORDER BY stamps.date
+						";
 
 						$result = mysql_query($query);
 
@@ -136,9 +140,13 @@
 									$innerQuery = "SELECT stamps.well_position, stamps.status_id, library.clone, library.gene
 										FROM stamps
 										LEFT JOIN library
-										ON library.well_position = stamps.well_position AND library.plate_id = stamps.plate_id
-										WHERE stamps.date = '$date' AND stamps.plate_id = '$plate_id' AND stamps.source_id = '$source_id'
-										ORDER BY stamps.well_position";
+										ON library.well_position = stamps.well_position 
+											AND library.plate_id = stamps.plate_id
+										WHERE stamps.date = '$date' 
+											AND stamps.plate_id = '$plate_id' 
+											AND stamps.source_id = '$source_id'
+										ORDER BY stamps.well_position
+									";
 
 									$innerResult = mysql_query($innerQuery);
 
@@ -154,7 +162,7 @@
 									$discrepancyCounter = 0;
 									
 									//for each well, assign a status to the "colony"
-									while ($innerRow=mysql_fetch_assoc($innerResult)) {
+									while ($innerRow = mysql_fetch_assoc($innerResult)) {
 										$well_position = $innerRow['well_position'];
 										$clone = $innerRow['clone'];
 										$gene = $innerRow['gene'];
@@ -186,8 +194,11 @@
 									echo "<div class='comments'><b>Comments:</b></div>";
 									$innerQuery = "SELECT stamps.comments, stamps.well_position
 										FROM stamps
-										WHERE stamps.date = '$date' AND stamps.plate_id = '$plate_id' AND stamps.source_id = '$source_id'
-										ORDER BY stamps.well_position";
+										WHERE stamps.date = '$date' 
+											AND stamps.plate_id = '$plate_id'
+											AND stamps.source_id = '$source_id'
+										ORDER BY stamps.well_position
+									";
 
 									$innerResult = mysql_query($innerQuery);
 
@@ -200,7 +211,7 @@
 										$comments = $innerRow['comments'];
 										$well_position = $innerRow['well_position'];
 										
-										if ($comments !== "") {
+										if ($comments != NULL) {
 											echo "<div class='comments'>$well_position: $comments</div>";
 										}
 									}
@@ -216,7 +227,9 @@
 							}
 						}
 					} else {
-						echo "<h1>Sorry; no plate matched your query!</h1><br><img src='./images/sad-puppy.jpg' style='margin-left:280px'>";
+						echo "<h1>Sorry; no plate matched your query!</h1>
+							<br><img src='./images/sad-puppy.jpg' style='margin-left:280px'>
+						";
 					}
 				}
 			?>
