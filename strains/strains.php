@@ -28,82 +28,63 @@
 						<td>Mutagen / Method</td>
 				</tr>
 				<?php
-					// If there is a search term //
-					if ($_GET["search_term"]) {
-						$search_term = $_GET["search_term"];
-						$query = "SELECT distinct strains.id AS strain_id, strains.strain, strains.genotype, 
-								strains.transgene_id, strains.vector_template_id,
-								strains.gene, strains.sequence, 
-								strains.promotor, strains.threePrimeUTR,
-								species.species, authors.author, mutagen.mutagen
-							FROM strains
-							LEFT JOIN authors
-								ON authors.id = strains.author_id
-							LEFT JOIN species
-								ON species.id = strains.species_id
-							LEFT JOIN mutagen
-								ON mutagen.id = strains.mutagen_id
-							LEFT JOIN vector_template
-								ON vector_template.id = strains.vector_template_id
+					// Define common beginning of query for strain fields to display
+					$query = "SELECT strains.strain, strains.genotype, strains.transgene_id,
+							species.species, authors.author, mutagen.mutagen
+						FROM strains
+						LEFT JOIN authors
+							ON authors.id = strains.author_id
+						LEFT JOIN species
+							ON species.id = strains.species_id
+						LEFT JOIN mutagen
+							ON mutagen.id = strains.mutagen_id
+					";
+					
+					// If there is a search term
+					if (mysql_real_escape_string($_GET["search_term"])) {
+						$search_term = mysql_real_escape_string($_GET["search_term"]);
+						$query = $query . "
 							WHERE strains.strain LIKE '%$search_term%'
 								OR strains.genotype LIKE '%$search_term%'
 								OR species.species LIKE '%$search_term%'
 								OR strains.remarks LIKE '%$search_term%'
-								OR strains.gene LIKE '%$search_term%'
-								OR strains.sequence LIKE '%$search_term%'
-								OR vector_template.name LIKE '%$search_term%'
+								OR strains.culture LIKE '%$search_term%'
 								OR authors.author LIKE '%$search_term%'
-								OR strains.date_created LIKE '%$search_term%'
 								OR mutagen.mutagen LIKE '%$search_term%'
 								OR strains.outcrossed LIKE '%$search_term%'
 								OR strains.outcrossed LIKE '%" . preg_replace('/x/', '', $search_term) . "%'
 							ORDER BY strains.strain_sort
 						";
-					// If no search term, default display all rows //
+					
+					// If no search term, default display all rows
 					} else {
-						$query = "SELECT strains.id AS strain_id, strains.strain, strains.genotype,
-							strains.transgene_id, strains.vector_template_id,
-							strains.gene, strains.sequence,
-							strains.promotor, strains.threePrimeUTR,
-							species.species, authors.author, mutagen.mutagen
-							FROM strains
-							LEFT JOIN authors
-								ON authors.id = strains.author_id
-							LEFT JOIN species
-								ON species.id = strains.species_id
-							LEFT JOIN mutagen
-								ON mutagen.id = strains.mutagen_id
+						$query = $query . "
 							ORDER BY strains.strain_sort
 						";
 					}
                     
-					// Run the query //
+					// Run the query
 					$result = mysql_query($query);
 					if (!$result) {
 						echo 'Could not run query: ' . mysql_error();
 						exit;
 					}
 					
-					// Retrieve results //
+					// Retrieve results
 					while ($row = mysql_fetch_assoc($result)) {
-						$strain_id = $row['strain_id'];
 						$strain = $row['strain'];
-						$genotype = $row['genotype'];
-						$transgene_id = $row['transgene_id'];
-						$vector_template_id = $row['vector_template_id'];
-						$gene = $row['gene'];
-						$sequence = $row['sequence'];
-						$promotor = $row['promotor'];
-						$threePrimeUTR = $row['threePrimeUTR'];				
 						$species = $row['species'];
+						$genotype = $row['genotype'];
+						$transgene_id = $row['transgene_id'];			
 						$author = $row['author'];
 						$mutagen = $row['mutagen'];
-						
 
-						// Generate the genotype using the template and any relevant pieces
-						$genotype = generate_genotype($genotype, $transgene_id, $vector_template_id,
-							$gene, $sequence, $promotor, $threePrimeUTR);
-						
+						// If genotype template code provided
+						if (strlen($genotype) <= 2 && strlen($genotype) >= 1) {
+							// generate genotype using the template and any relevant pieces
+							$genotype = generate_genotype($genotype, $transgene_id);
+						}
+			
 						// If strain isn't null, print the fields
 						if ($strain != NULL) {
 							echo "
@@ -122,4 +103,3 @@
 		</div>
 	</body>
 </html>
-		

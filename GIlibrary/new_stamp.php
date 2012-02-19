@@ -19,12 +19,12 @@
 				include ("../includes/top_bar.php");
 				include ("../includes/new_stamp_search_form.php");
 				
-				if ($_GET["date"]) {
-					$date = $_GET["date"];
+				if (mysql_real_escape_string($_GET["date"])) {
+					$date = mysql_real_escape_string($_GET["date"]);
 				}
 				
-				if ($_GET["search_term"]) {
-					$search_term = $_GET["search_term"];
+				if (mysql_real_escape_string($_GET["search_term"])) {
+					$search_term = mysql_real_escape_string($_GET["search_term"]);
 					$query = "SELECT library.plate_id
 						FROM library
 						WHERE library.plate_id = '$search_term'

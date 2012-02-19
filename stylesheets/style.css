@@ -1,5 +1,5 @@
 /* Copyright (c) 2011 Katherine Erickson */
-
+/* bold 70s green: DBDB00 */
 img {
 border: 0 none;
   }
@@ -13,14 +13,14 @@ img.jessica {
 /* ~~~~~~~~ GLOBAL STYLES ~~~~~~~~ */
 
 body {
-	background: #DBDB00;
+	background: #F0F8FA;
 	font-size: 16px;
 	font-family: Helvetica, Arial, Sans-Serif;
 	color: #140D14;
 }
 
 div#content {
-	background: #DBDB00;
+	background: #F0F8FA;
 	width: 960px;
 	min-height: 500px;
 	margin: 0 auto;
@@ -104,11 +104,24 @@ input.loginInput {
 }
 
 
+/* ~~~~~~~~ INDEX PAGE ~~~~~~~~ */
+
+div#indexContainer {
+	float: left;
+	clear: both;
+	background: #FFF;
+	border: 1px solid #AAA;
+	width: 900px;
+	margin: 20px 0px;
+	padding: 30px;
+}
+
+
 
 /* ~~~~~~~~ STRAINS PAGE ~~~~~~~~ */
 
 div#contentStrains {
-	background: #DBDB00;
+	background: #F0F8FA;
 	margin: 30px;
 	padding: 40px;
 }
@@ -130,9 +143,9 @@ table#strains td {
 
 tr.topRow {
 	font-size: 15px;
-	font-weight: bold;
-	background: #F93;
+	background: #635335;
 	text-align: center;
+	color: #FFF;
 }
 
 
@@ -142,12 +155,12 @@ tr.topRow {
 div#strainName {
 	float: left;
 	clear: both;
-	background: #F93;
+	color: #FFF;
+	background: #635335;
 	border: solid #AAA;
 	border-width: 0px 0px 1px 0px;
-	width: 760px;
+	width: 960px;
 	font-size: 18px;
-	font-weight: bold;
 	text-align: center;
 	padding: 10px 0px;
 }
@@ -157,8 +170,8 @@ div#strainContainer {
 	clear: both;
 	background: #FFF;
 	border: 1px solid #AAA;
-	width: 760px;
-	margin: 20px 100px;
+	width: 960px;
+	margin: 20px 0px;
 }
 
 div.strainSection {
@@ -176,7 +189,13 @@ div.strainSection h2 {
 
 div.strainData {
 	float: left;
-	margin: 10px 30px 10px 30px;
+	margin: 10px 30px;
+}
+
+div.freezeData {
+	float: left;
+	width: 420px;
+	margin: 10px 30px;
 }
 
 div.line {
@@ -185,7 +204,7 @@ div.line {
 	background: #AAA;
 	height: 1px;
 	width: 660px;
-	margin: 10px 50px;
+	margin: 10px 150px;
 }
 
 
@@ -220,7 +239,7 @@ div.plate {
 	width: 684px;
 	height: 456px;
 	background: #635335;
-	border: 5px solid #F93;
+	border: 5px solid #635335;
 	margin: 0 auto;
 }
 
@@ -252,7 +271,7 @@ div.plateSmall {
 	width: 372px;
 	height: 248px;
 	background: #635335;
-	border: 5px solid #F93;
+	border: 5px solid #635335;
 }
 
 div.wellSmall {
@@ -280,7 +299,7 @@ div.plateMedium {
 	width: 636px;
 	height: 368px;
 	background: #635335;
-	border: 5px solid #F93;
+	border: 5px solid #635335;
 	margin: 0 auto;
 }
 
@@ -317,6 +336,8 @@ div.commentPopup {
 div.vatImage {
 	float: left;
 	padding: 20px;
+	text-align: center;
+	
 }
 
 div#rack_view table, div#box_view table, div#vat_view table, div#tube_view table {

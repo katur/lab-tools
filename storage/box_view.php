@@ -86,7 +86,7 @@
 				include ("../includes/top_bar.php");				
 				echo "<div id='storage'>";				
 					echo "<div id='box_view'>";				
-						$rack_id = $_GET["rack_id"];
+						$rack_id = mysql_real_escape_string($_GET["rack_id"]);
 								
 						// get vat and rack names for page header //
 						$query = "SELECT storage_vat.vat_name, storage_vat.id AS vat_id, 

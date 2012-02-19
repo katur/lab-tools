@@ -19,8 +19,8 @@
 				include ("../includes/top_bar.php");
 				include ("../includes/plate_search_form.php");
 				
-				if ($_GET["search_term"]) {
-					$search_term = $_GET["search_term"];
+				if (mysql_real_escape_string($_GET["search_term"])) {
+					$search_term = mysql_real_escape_string($_GET["search_term"]);
 					$query = "SELECT library.plate_id
 						FROM library
 						WHERE library.plate_id = '$search_term'

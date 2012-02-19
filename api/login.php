@@ -6,8 +6,8 @@
 	session_start();
 	
 	// GET the login credentials from the URL //
-	$username = $_GET["username"];
-	$password = $_GET["password"];
+	$username = mysql_real_escape_string($_GET["username"]);
+	$password = mysql_real_escape_string($_GET["password"]);
 	
 	// Define the query as selecting the entire (*) row from the users table when the user and password match; limit to one result //	
 	$query = "SELECT *

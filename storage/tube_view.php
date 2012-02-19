@@ -15,7 +15,7 @@
 				include ("../includes/top_bar.php");				
 				echo "<div id='storage'>";				
 					echo "<div id='tube_view'>";					
-						$box_id = $_GET["box_id"];
+						$box_id = mysql_real_escape_string($_GET["box_id"]);
 						
 						// get vat name and rack name and box name for page header //
 						$query = "SELECT storage_vat.vat_name, storage_rack.rack_name, 
@@ -93,7 +93,7 @@
 											} else {
 												while ($row=mysql_fetch_assoc($result)) {
 													// Assign variables //
-													$tube_id = $row['tube_id'];
+													$tube_id = $row['id'];
 													$tube_contents = $row['tube_contents'];
 													$freeze_date = reconfigure_date($row['freeze_date']);
 													$initials = $row['initials'];

@@ -5,7 +5,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 	<head>
-		<title>Piano Strain Database</title>
+		<title>Gunsiano Strain Database</title>
 
 		<link rel="stylesheet" type="text/css" href="../stylesheets/style.css">
 
@@ -18,16 +18,14 @@
 				include ("../includes/top_bar.php");
 				include ("../includes/strain_search_form.php");
 			
-				// GET the strain name from the URL
-				$strain = $_GET["strain"];
+				// get the strain name from the URL
+				$strain = mysql_real_escape_string($_GET["strain"]);
 				
-				$query = "SELECT strains.id AS strain_id, strains.strain, species.species, strains.genotype,
-						strains.vector_template_id, 
-						strains.gene, strains.sequence, 
-						strains.promotor, strains.threePrimeUTR,
+				// query for strain fields of interest
+				$query = "SELECT strains.id AS strain_id, 
+						strains.strain, species.species, strains.genotype, strains.transgene_id,
 						strains.date_created, authors.author, labs.lab, mutagen.mutagen, strains.outcrossed,
-						strains.phenotype, strains.culture,
-						strains.reference, strains.remarks, strains.wormbase, 
+						strains.culture, strains.remarks, strains.wormbase, 
 						strains.received_from, strains.date_received
 					FROM strains
 					LEFT JOIN authors
@@ -38,28 +36,23 @@
 						ON mutagen.id = strains.mutagen_id
 					LEFT JOIN labs
 						ON labs.id = strains.lab_id
-					WHERE strains.strain = '$strain'";
-
+					WHERE strains.strain = '$strain'
+				";
+				
+				// run the query
 				$result = mysql_query($query);
 				if (!$result) {
 					echo 'Could not run query: ' . mysql_error();
 					exit;
 				}
 				
-				while ($row=mysql_fetch_assoc($result)) {
-					// Assign variables //
+				// retrieve results
+				while ($row = mysql_fetch_assoc($result)) {
 					$strain_id = $row['strain_id'];
 					$strain = $row['strain'];
 					$species = $row['species'];
 					$genotype = $row['genotype'];
-					
-					$vector_template_id = $row['vector_template_id'];
-					$vector = $row['vector'];
-		
-					$gene = $row['gene'];
-					$sequence = $row['sequence'];
-					$promotor = $row['promotor'];
-					$threePrimeUTR = $row['threePrimeUTR'];
+					$transgene_id = $row['transgene_id'];
 					
 					$date_created = reconfigure_date($row['date_created']);
 					$author = $row['author'];
@@ -67,29 +60,16 @@
 					$mutagen = $row['mutagen'];
 					$outcrossed = $row['outcrossed'];
 					
-					$phenotype = $row['phenotype'];
 					$culture = $row['culture'];
-					
-					$reference = $row['reference'];
 					$remarks = $row['remarks'];
 					$wormbase = $row['wormbase'];
-					
 					$received_from = $row['received_from'];
 					$date_received = reconfigure_date($row['date_received']);
 
-					// If no genotype but a genotype template...
-				
-					$genotype = generate_genotype($genotype, $vector_template_id,
-						$gene, $sequence, $promotor, $threePrimeUTR);
-					
-					// Add an "x" to times outcrossed if it exists
-					if ($outcrossed) {
-						$outcrossed = $outcrossed . "x";
-					}
-					
-					// Change the wormbase link to an active link
-					if ($wormbase) {
-						$wormbase = "<a href='$wormbase' target='_blank'>See strain on WormBase</a>";
+					// If genotype template code provided
+					if (strlen($genotype) <= 2 && strlen($genotype) >= 1) {
+						// generate genotype using the template and any relevant pieces
+						$genotype = generate_genotype($genotype, $transgene_id);
 					}
 				}
 			?>
@@ -97,52 +77,44 @@
 			<!-- Display the results of the query -->
 			<div id="strainContainer">
 				<div id="strainName">
-					<?php echo $strain; ?>
+					<?php echo $strain;?>
 				</div>
+				
+				
+				<!-- STRAIN OVERVIEW SECTION-->
+				
 				<div class="strainSection">
 					<?php
 						if ($strain != NULL) {
 							echo "<div class='strainData'><b>Strain:</b>&nbsp;$strain</div>";
 						}
+						
 						if ($species != NULL) {
 							echo "<div class='strainData'><b>Species:</b>&nbsp;<i>$species</i></div>";
 						}
-						if ($wormbase != NULL) {
-							echo "<div class='strainData'>$wormbase</div>";
+						
+						if ($wormbase == 1) {
+							// create link to wormbase using generate_wormbase()
+							echo "<div class='strainData'>
+								<a href='" . generate_wormbase($strain) . "' target='_blank'>
+									See strain on WormBase
+								</a>
+							</div>";
 						}
+						
 						if ($genotype != NULL) {
 							echo "<div class='strainData'><b>Genotype:</b>&nbsp;$genotype</div>";
 						}
 						
-					 	//Query the Elements + Categories Tables and display results
-						// $query = "SELECT elements.element, categories.category
-						// 	FROM elements
-						// 	LEFT JOIN categories
-						// 		ON categories.id = elements.category_id
-						// 	WHERE elements.strain_id = '$strain_id'
-						// ";
-						// 	
-						// $result = mysql_query($query);
-						// 	
-						// if (!$result) {
-						// 	echo 'Could not run query: ' . mysql_error();
-						// 	exit;
-						// }
-						// 	
-						// while ($row=mysql_fetch_assoc($result)) {
-						// 	$category = $row['category'];
-						// 	$element = $row['element'];
-						// 	echo "<div class='strainData'>$category:&nbsp;$element</div>";
-						// }
-						
-						if ($phenotype != NULL) {
-							echo "<div class='strainData'><b>Phenotype:</b>&nbsp;$phenotype</div>";
-						}
 						if ($culture != NULL) {
 							echo "<div class='strainData'><b>Culture:</b>&nbsp;$culture</div>";
 						}
 					?>
 				</div>
+				
+				
+				<!-- ORIGIN SECTION-->
+				
 				<?php
 					if ($author != NULL || $lab != NULL || $date_created != NULL || $mutagen != NULL || $outcrossed != NULL) {
 						echo "
@@ -163,7 +135,8 @@
 							echo "<div class='strainData'><b>Mutagen or Method Used:</b>&nbsp;$mutagen</div>";
 						}
 						if ($outcrossed != NULL) {
-							echo "<div class='strainData'><b>Outcrossed:</b>&nbsp;$outcrossed</div>";
+							// Add an "x" to the number of times outcrossed
+							echo "<div class='strainData'><b>Outcrossed:</b>&nbsp;" . $outcrossed . "x</div>";
 						}
 						echo "</div>";
 					}
@@ -178,18 +151,9 @@
 						";
 					}
 					
-					if ($reference != NULL) {
-						echo "
-							<div class='line'></div>
-							<div class='strainSection'>
-								<h2>Reference</h2>
-								<div class='strainData'>$reference</div>
-							</div>
-						";
-					}
 					
-					// Query the storage_tube table
-					
+					// STORAGE SECTION
+			
 					$query = "SELECT storage_vat.vat_name, storage_rack.rack_name, storage_box.box_name, 
 							storage_tube.horizontal_position, storage_tube.vertical_position, 
 							storage_tube_ref.freeze_date, authors.author
@@ -216,19 +180,25 @@
 					
 					$numrows = mysql_num_rows($result);
 					
-					if ($received_from != NULL || $date_received != NULL || $numrows>0) {
-						echo "
+					if ($received_from != NULL || $date_received != NULL || $numrows > 0) {
+						echo " 
 							<div class='line'></div>
 							<div class='strainSection'>
 								<h2>Stock</h2>
 						";
 						
-						if ($received_from != NULL) {
-							echo "<div class='strainData'><b>Received From:</b>&nbsp;$received_from</div>";
-						}
-					
-						if ($date_received != NULL) {
-							echo "<div class='strainData'><b>Date Received:</b>&nbsp;$date_received</div>";
+						if ($received_from != NULL || $date_received != NULL) {
+							echo "<div class='strainSection'>";
+							
+							if ($received_from != NULL) {
+								echo "<div class='strainData'><b>Received From:</b>&nbsp;$received_from</div>";
+							}
+
+							if ($date_received != NULL) {
+								echo "<div class='strainData'><b>Date Received:</b>&nbsp;$date_received</div>";
+							}
+							
+							echo "</div>";
 						}
 						
 						$letter_array=array('A','B','C','D','E','F','G','H','I');
@@ -249,7 +219,7 @@
 						
 			
 							echo "
-								<div class='strainData'>
+								<div class='freezeData'>
 									<b>$vat_name</b>&nbsp;&nbsp;Rack $rack_name - Box $box_name - $vertical_position$horizontal_position
 									<br>Frozen by $frozen_by on $freeze_date	
 								</div>

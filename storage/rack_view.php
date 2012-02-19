@@ -16,7 +16,7 @@
 				include ("../includes/top_bar.php");				
 				echo "<div id='storage'>";				
 					echo "<div id='rack_view'>";				
-						$vat_id = $_GET["vat_id"];			
+						$vat_id = mysql_real_escape_string($_GET["vat_id"]);			
 						$query = "SELECT storage_vat.vat_name, storage_vat.shelves, storage_vat.shelf_rack_total
 							FROM storage_vat
 							WHERE storage_vat.id = $vat_id

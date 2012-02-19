@@ -17,13 +17,15 @@
 		<div id='content'>
 			<?php
 				include ("../includes/top_bar.php");
-				include ("../includes/library_search_form.php");
+				include ("../includes/clone_search_form.php");
 				
 				if (mysql_real_escape_string($_GET["search_term"])) {
 					$search_term = mysql_real_escape_string($_GET["search_term"]);
-					$query = "SELECT library.plate_id
+					$query = "SELECT library.plate_id, library.well_position, library.clone, library.node_primary_name, library.gene
 						FROM library
-						WHERE library.plate_id = '$search_term'
+						WHERE library.clone LIKE '$search_term'
+						OR library.node_primary_name LIKE '$search_term'
+						OR library.gene LIKE '$search_term'
 						LIMIT 1
 					";
 
@@ -35,12 +37,17 @@
 					}
 					
 					if (mysql_num_rows($result) != 0) {
-						while ($row=mysql_fetch_assoc($result)) {
-							$plate = $row['plate_id'];
-							if (preg_match("/-/", $plate)) {
-								echo "<h1>$plate</h1>";
+						while ($row = mysql_fetch_assoc($result)) {
+							$plate_id = $row['plate_id'];
+							$well_position = $row['well_position'];
+							$clone = $row['clone'];
+							$node_primary_name = $row['node_primary_name'];
+							$gene = $row['gene'];
+							
+							if (preg_match("/-/", $plate_id)) {
+								echo "<h1>$gene: well $well_position of $plate_id</h1>";
 							} else {
-								echo "<h1>Vidal $plate</h1>";
+								echo "<h1>$gene: well $well_position of Vidal $plate_id</h1>";
 							}
 						}
 						
@@ -48,7 +55,7 @@
 						
 						$query = "SELECT library.well_position, library.clone, library.gene
 							FROM library
-							WHERE library.plate_id = '$search_term'
+							WHERE library.plate_id = '$plate_id'
 							ORDER BY library.well_position
 						";
 
