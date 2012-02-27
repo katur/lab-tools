@@ -19,8 +19,14 @@
 						<td>Mutagen / Method</td>
 				</tr>
 				<?php
-					// Define common beginning of query for strain fields to display
+					// Get search term if there is one
+					if (mysql_real_escape_string($_GET["search_term"])) {
+						$search_term = mysql_real_escape_string($_GET["search_term"]);
+					}
+					
+					// Query all rows in strains
 					$query = "SELECT strains.strain, strains.genotype, strains.transgene_id,
+							strains.remarks, strains.culture, 
 							species.species, authors.author, mutagen.mutagen
 						FROM strains
 						LEFT JOIN authors
@@ -29,30 +35,8 @@
 							ON species.id = strains.species_id
 						LEFT JOIN mutagen
 							ON mutagen.id = strains.mutagen_id
+						ORDER BY strains.strain_sort
 					";
-					
-					// If there is a search term
-					if (mysql_real_escape_string($_GET["search_term"])) {
-						$search_term = mysql_real_escape_string($_GET["search_term"]);
-						$query = $query . "
-							WHERE strains.strain LIKE '%$search_term%'
-								OR strains.genotype LIKE '%$search_term%'
-								OR species.species LIKE '%$search_term%'
-								OR strains.remarks LIKE '%$search_term%'
-								OR strains.culture LIKE '%$search_term%'
-								OR authors.author LIKE '%$search_term%'
-								OR mutagen.mutagen LIKE '%$search_term%'
-								OR strains.outcrossed LIKE '%$search_term%'
-								OR strains.outcrossed LIKE '%" . preg_replace('/x/', '', $search_term) . "%'
-							ORDER BY strains.strain_sort
-						";
-					
-					// If no search term, default display all rows
-					} else {
-						$query = $query . "
-							ORDER BY strains.strain_sort
-						";
-					}
                     
 					// Run the query
 					$result = mysql_query($query);
@@ -61,12 +45,20 @@
 						exit;
 					}
 					
+					// Set counter to count the total results
+					$base_counter = 0;
+					$search_counter = 0;
+					
 					// Retrieve results
 					while ($row = mysql_fetch_assoc($result)) {
+						$base_counter++;
+						
 						$strain = $row['strain'];
 						$species = $row['species'];
 						$genotype = $row['genotype'];
-						$transgene_id = $row['transgene_id'];			
+						$transgene_id = $row['transgene_id'];
+						$remarks = $row['remarks'];
+						$culture = $row['culture'];
 						$author = $row['author'];
 						$mutagen = $row['mutagen'];
 
@@ -75,20 +67,51 @@
 							// generate genotype using the template and any relevant pieces
 							$genotype = generate_genotype($genotype, $transgene_id);
 						}
-			
-						// If strain isn't null, print the fields
-						if ($strain != NULL) {
-							echo "
-								<tr>
-									<td><a href='/strains/strain.php?strain=$strain'>$strain</a></td>
-									<td><i>$species</i></td>
-									<td>$genotype</td>
-									<td>$author</td>
-									<td>$mutagen</td>
-								</tr>
-							";
+						
+						// If there is a search term, only display if matches search term
+						if ($search_term && $strain) {
+							if (preg_match('/'.$search_term.'/', $strain) ||
+								preg_match('/'.$search_term.'/', $species) ||
+								preg_match('/'.$search_term.'/', $genotype) ||
+								preg_match('/'.$search_term.'/', $remarks) ||
+								preg_match('/'.$search_term.'/', $culture) ||
+								preg_match('/'.$search_term.'/', $author) ||
+								preg_match('/'.$search_term.'/', $mutagen)
+							){
+								$search_counter++;
+								echo "
+									<tr>
+										<td><a href='/strains/strain.php?strain=$strain'>$strain</a></td>
+										<td><i>$species</i></td>
+										<td>$genotype</td>
+										<td>$author</td>
+										<td>$mutagen</td>
+									</tr>
+								";
+							}
+								
+						// If there isn't a search term
+						} else {
+							// if strain isn't null, print all fields
+							if ($strain != NULL) {
+								echo "
+									<tr>
+										<td><a href='/strains/strain.php?strain=$strain'>$strain</a></td>
+										<td><i>$species</i></td>
+										<td>$genotype</td>
+										<td>$author</td>
+										<td>$mutagen</td>
+									</tr>
+								";
+							}
 						}
 					}
+					if ($search_counter) {
+						echo "$search_counter out of $base_counter strains match search term";
+					} else {
+						echo "$base_counter strains";
+					}
+					
 				?>								
 			</table>
 		</div>
