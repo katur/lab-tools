@@ -26,7 +26,7 @@
 					
 					// Query all rows in strains
 					$query = "SELECT strains.strain, strains.genotype, strains.transgene_id,
-							strains.remarks, strains.culture, 
+							strains.remarks, strains.culture, strains.received_from,
 							species.species, authors.author, mutagen.mutagen
 						FROM strains
 						LEFT JOIN authors
@@ -61,6 +61,7 @@
 						$culture = $row['culture'];
 						$author = $row['author'];
 						$mutagen = $row['mutagen'];
+						$received_from = $row['received_from'];
 
 						// If genotype template code provided
 						if (strlen($genotype) <= 2 && strlen($genotype) >= 1) {
@@ -70,13 +71,15 @@
 						
 						// If there is a search term, only display if matches search term
 						if ($search_term && $strain) {
-							if (preg_match('/'.$search_term.'/', $strain) ||
-								preg_match('/'.$search_term.'/', $species) ||
-								preg_match('/'.$search_term.'/', $genotype) ||
-								preg_match('/'.$search_term.'/', $remarks) ||
-								preg_match('/'.$search_term.'/', $culture) ||
-								preg_match('/'.$search_term.'/', $author) ||
-								preg_match('/'.$search_term.'/', $mutagen)
+						    $search_term_lower = strtolower($search_term);
+							if (preg_match('/'.$search_term_lower.'/', strtolower($strain)) ||
+								preg_match('/'.$search_term_lower.'/', strtolower($species)) ||
+								preg_match('/'.$search_term_lower.'/', strtolower($genotype)) ||
+								preg_match('/'.$search_term_lower.'/', strtolower($remarks)) ||
+								preg_match('/'.$search_term_lower.'/', strtolower($culture)) ||
+								preg_match('/'.$search_term_lower.'/', strtolower($author)) ||
+								preg_match('/'.$search_term_lower.'/', strtolower($mutagen)) ||
+								preg_match('/'.$search_term_lower.'/', strtolower($received_from))
 							){
 								$search_counter++;
 								echo "

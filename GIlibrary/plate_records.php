@@ -39,10 +39,10 @@
 						
 						echo "<div class='plateSmall' style='margin: 0 auto;'>";
 						
-						$query = "SELECT well_position, clone, gene
+						$query = "SELECT library.well_position, library.clone, library.gene
 							FROM library
-							WHERE plate_id = '$search_term'
-							ORDER BY well_position
+							WHERE library.plate_id = '$search_term'
+							ORDER BY library.well_position
 						";
 
 						$result = mysql_query($query);
@@ -132,8 +132,8 @@
 										LEFT JOIN library
 										ON library.well_position = stamps.well_position 
 											AND library.plate_id = stamps.plate_id
-										WHERE stamps.plate_id = '$plate_id'
-											AND stamps.date = '$date' 
+										WHERE stamps.date = '$date' 
+											AND stamps.plate_id = '$plate_id' 
 											AND stamps.source_id = '$source_id'
 										ORDER BY stamps.well_position
 									";
@@ -218,7 +218,7 @@
 						}
 					} else {
 						echo "<h1>Sorry; no plate matched your query!</h1>
-							<br><img src='./images/sad-puppy.jpg' style='margin-left:280px'>
+							<br><img src='../images/sad-puppy.jpg' style='margin-left:280px'>
 						";
 					}
 				}

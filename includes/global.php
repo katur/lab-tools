@@ -1,8 +1,8 @@
 <!-- Copyright (c) 2010-2012 Katherine Erickson -->
 
 <?php
-	session_start();
-	if (!$_SESSION["logged_in"]) {
+  session_start();
+	if (!$_SESSION["logged_in"] && !($_SERVER['REQUEST_URI'] == '/' || $_SERVER['REQUEST_URI'] == '/index.php')) {
 		header("location: /");
 	}
 	include("functions.php");

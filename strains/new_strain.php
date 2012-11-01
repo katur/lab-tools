@@ -11,14 +11,12 @@
 				// if there is data from a POST, insert the post into the database
 				if ($_POST) {
 					$strain = mysql_real_escape_string($_POST['strain']);
-					$renamed_strain = rename_strain($strain);
 					$species_id = mysql_real_escape_string($_POST['species_id']);
 					$mutagen_id = mysql_real_escape_string($_POST['mutagen_id']);
 					$genotype = mysql_real_escape_string($_POST['genotype']);
 					$transgene_id = mysql_real_escape_string($_POST['transgene_id']);
 					$wormbase = mysql_real_escape_string($_POST['wormbase']);
 					$author_id = mysql_real_escape_string($_POST['author_id']);
-					$lab_id = mysql_real_escape_string($_POST['lab_id']);
 					$date_created = mysql_real_escape_string($_POST['date_created']);
 					$received_from = mysql_real_escape_string($_POST['received_from']);
 					$date_received = mysql_real_escape_string($_POST['date_received']);
@@ -26,7 +24,7 @@
 					$culture = mysql_real_escape_string($_POST['culture']);
 					$remarks = mysql_real_escape_string($_POST['remarks']);
 					
-					$query = "INSERT INTO strains (species_id, mutagen_id, strain, strain_sort, genotype, transgene_id, wormbase, author_id, lab_id, date_created, received_from, date_received, outcrossed, culture, remarks) VALUES ($species_id, $mutagen_id, '$strain', '$renamed_strain', '$genotype', $transgene_id, $wormbase, $author_id, $lab_id, '$date_created', '$received_from', '$date_received', $outcrossed, '$culture', '$remarks')";
+					$query = "INSERT INTO strains (species_id, mutagen_id, strain, genotype, transgene_id, wormbase, author_id, date_created, received_from, date_received, outcrossed, culture, remarks) VALUES ($species_id, $mutagen_id, '$strain', '$genotype', $transgene_id, $wormbase, $author_id, '$date_created', '$received_from', '$date_received', $outcrossed, '$culture', '$remarks')";
 
 					// run query
 					mysql_query($query) or die(mysql_error());
@@ -75,11 +73,6 @@
 						<!-- selections only ??? if not there, add new ???-->
 						<span>Author ID</span>
 						<input name='author_id' type='text' size='2'><br>
-						<br>
-						
-						<!-- selections only ??? if not there, add new ???-->
-						<span>Lab ID</span>
-						<input name='lab_id' type='text' size='2'><br>
 						<br>
 						
 						<span>Date Created</span>

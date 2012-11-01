@@ -1,0 +1,2 @@
+# disable view contents of directories
+Options -Indexes

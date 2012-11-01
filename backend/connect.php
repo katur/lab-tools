@@ -6,10 +6,10 @@
 		$password = "root";
 		$database = "PianoLab";
 	} else {
-		$host = "sql5c40a.carrierzone.com";
-		$username = "lauraerick614155";
-		$password = "shellwax36";
-		$database = "nyu_lauraerickson1_site_aplus_net";
+	  	$host = "mysql.lab.katherineerickson.com";
+		$username = "labtoolssqluser";
+		$password = "Scdb&MQ@NTycLUEIxg19";
+		$database = "labtools";
 	}
 
 	$conn = mysql_connect($host,$username,$password);

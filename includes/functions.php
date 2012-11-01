@@ -1,7 +1,11 @@
 <!-- Copyright (c) 2010-2012 Katherine Erickson -->
 
 <?php
-	// reconfigures yearmonthdate to month/date/year
+
+	/*  reconfigure a date.
+	    accepts date in format: yearmonthdate.
+	    returns date in format: month/date/year. */
+	    
 	function reconfigure_date($date){
 		if ($date) {
 			$times = explode('-', $date);
@@ -11,27 +15,27 @@
 		}
 	}
 	
-	// renames strain in sortable order (by adding zeros after lab designation)
-	function rename_strain($strain){
-		$letters = substr($strain, 0, 2);
-		$numbers = substr($strain, 2);
-		$number_of_numbers = strlen($numbers);
-		if ($number_of_numbers < 5) {
-			$tally = 0;
-			while ($tally < (5 - $number_of_numbers)) {
-				$numbers = '0' . $numbers;
-				$tally = $tally + 1;
-			}
-		}
-		return $letters . $numbers;
-	}
 	
-	// generates wormbase link from strain name
+	
+	/*  generate a wormbase link from a strain name.
+	    returns wormbase link as string. */
+	    
 	function generate_wormbase($strain) {
-		return preg_replace('/strain_fill/', $strain, 'http://wormbase.org/db/gene/strain?query=strain_fill;class=Strain');
+		return preg_replace('/strain_fill/', $strain, 'http://wormbase.org/species/c_elegans/strain/strain_fill#01--9');
 	}
 	
-	// generates genotype from a template using pieces
+	
+	
+	/*  generate genotype using pieces in the database.
+	    this function takes the genotype and transgene_id fields from 
+	        the 'strains' table.
+	    in some cases the genotype field represents the complete genotype; in 
+	        these cases, the unaltered genotype is returned.
+	    if the transgene_id field is populated, then the genotype serves as
+	        a genotype template, in which case the other pieces from other
+	        tables are assembled.
+	    returns the genotype as a string. */
+	
 	function generate_genotype($genotype, $transgene_id) {
 		// retrieve and define the genotype template
 		$query = "SELECT genotype FROM genotype WHERE id = $genotype";
@@ -91,7 +95,11 @@
 		return $genotype;
 	}
 	
-	// displays contents of a freezer rack
+	
+	
+	/*  display contents of a freezer rack.
+	    returns nothing. */
+
 	function rack_contents($rack_id, $slots_horizontal_count, $slots_vertical_count) {
 		// get box information for all boxes in the rack //
 		$query = "SELECT storage_box.box_name, storage_box.id AS box_id, 
@@ -110,7 +118,7 @@
 		}
 		
 		if (mysql_num_rows($result) == 0) {
-			echo "<td>No Record</td>";
+			echo "<td class='emptyEmphasis'>No Record</td>";
 		} else {
 			while ($row = mysql_fetch_assoc($result)) {
 				// Assign variables //
@@ -123,17 +131,17 @@
 					if ($box_name != NULL && $author != NULL) {
 						echo "<td class='wholeLink'><a href='/storage/tube_view.php?box_id=$box_id'>$box_name
 							<br>$author
-							<br>previously: $old_location
+							<br>prev: $old_location
 						</a></td>";
 					} else {
 						if ($box_name != NULL) {
 							echo "<td class='wholeLink'><a href='/storage/tube_view.php?box_id=$box_id'>$box_name
-								<br>previously: $old_location
+								<br>prev: $old_location
 							</a></td>";
 						} else {
 							if ($author != NULL) {
 								echo "<td class='wholeLink'><a href='/storage/tube_view.php?box_id=$box_id'>$author
-									<br>previously: $old_location
+									<br>prev: $old_location
 								</a></td>";
 							} else {
 								echo "<td>Empty Space</td>";

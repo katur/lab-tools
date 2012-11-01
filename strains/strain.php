@@ -15,9 +15,9 @@
 				// query for strain fields of interest
 				$query = "SELECT strains.id AS strain_id, 
 						strains.strain, species.species, strains.genotype, strains.transgene_id,
-						strains.date_created, authors.author, labs.lab, mutagen.mutagen, strains.outcrossed,
+						strains.date_created, authors.author, lab_codes.lab, mutagen.mutagen, strains.outcrossed,
 						strains.culture, strains.remarks, strains.wormbase, 
-						strains.received_from, strains.date_received
+						strains.received_from, strains.received_by, strains.date_received
 					FROM strains
 					LEFT JOIN authors
 						ON authors.id = strains.author_id
@@ -25,8 +25,8 @@
 						ON species.id = strains.species_id
 					LEFT JOIN mutagen
 						ON mutagen.id = strains.mutagen_id
-					LEFT JOIN labs
-						ON labs.id = strains.lab_id
+					LEFT JOIN lab_codes
+					ON strains.strain REGEXP CONCAT('^', lab_codes.strain_code, '[0-9]')
 					WHERE strains.strain = '$strain'
 				";
 				
@@ -55,6 +55,7 @@
 					$remarks = $row['remarks'];
 					$wormbase = $row['wormbase'];
 					$received_from = $row['received_from'];
+					$received_by = $row['received_by'];
 					$date_received = reconfigure_date($row['date_received']);
 
 					// If genotype template code provided
@@ -144,7 +145,7 @@
 					
 					
 					// STORAGE SECTION
-			
+								
 					$query = "SELECT storage_vat.vat_name, storage_rack.rack_name, storage_box.box_name, 
 							storage_tube.horizontal_position, storage_tube.vertical_position, 
 							storage_tube_ref.freeze_date, authors.author
@@ -171,7 +172,7 @@
 					
 					$numrows = mysql_num_rows($result);
 					
-					if ($received_from != NULL || $date_received != NULL || $numrows > 0) {
+					if ($received_from != NULL || $received_by != NULL || $date_received != NULL || $numrows > 0) {
 						echo " 
 							<div class='line'></div>
 							<div class='strainSection'>
@@ -183,6 +184,20 @@
 							
 							if ($received_from != NULL) {
 								echo "<div class='strainData'><b>Received From:</b>&nbsp;$received_from</div>";
+							}
+							
+							if ($received_by != NULL) {
+							    $query2 = "SELECT author FROM authors WHERE id = '$received_by'";
+							    $result2 = mysql_query($query2);
+            					if (!$result2) {
+            						echo 'Could not run query: ' . mysql_error();
+            						exit;
+            					}
+            					while ($row2 = mysql_fetch_assoc($result2)) {
+            					    $received_author = $row2['author'];
+            					}
+            					
+								echo "<div class='strainData'><b>Received By:</b>&nbsp;$received_author</div>";
 							}
 
 							if ($date_received != NULL) {

@@ -47,7 +47,7 @@
 											exit;
 										}
 										if (mysql_num_rows($result) == 0) {
-											echo "<td>NO RACK RECORDED</td>";
+											echo "<td class='emptyEmphasis'>No Record</td>";
 										} else {
 											while ($row = mysql_fetch_assoc($result)) {
 												// Assign variables //

@@ -29,7 +29,7 @@
 							<table>
 								<tr>
 									<td class="loginLabel">
-										Username:
+										username:
 									</td>
 									<td>
 										<input class="loginInput" type="text" name="username" value=""></input>
@@ -37,7 +37,7 @@
 								</tr>
 								<tr>
 									<td class="loginLabel">
-										Password:
+										password:
 									</td>
 									<td>
 										<input class="loginInput" type="password" name="password" value=""></input>
@@ -50,16 +50,16 @@
 					// if session variable 'logged in' IS present, allow user to 
 					//search strain DB, view all strains, or search RNAi plates.  
 					} else {
-						echo "<h2>Worm Strain Database</h2>";
+						echo "<h2>Worm Strain Database</h2>";						
 						include("includes/strain_search_form.php");
-						echo "<br><a href='strains/strains.php'>View all strains</a>";
+						echo "<br><a href='strains/strains.php'>view all strains</a>";
 					
 						// if admin, allow to add new RNAi stamp data.
 						if ($_SESSION["admin"] == 1) {
-							echo "<br><br><a href='/strains/new_strain.php'>Add new strain</a>";
+							echo "<br><br><a href='/strains/new_strain.php'>add new strain</a>";
 						}
 
-						echo "<br><br><br><h2>RNAi Library Database</h2>";
+						echo "<br><br><br><h2>Ahringer RNAi Library Database (96-well format)</h2>";
 						include("includes/clone_search_form.php");
 						echo "<br>";
 						include("includes/library_search_form.php");
@@ -72,8 +72,8 @@
 							include("includes/new_stamp_search_form.php");
 						}
 					
-						echo "<br><br><h2>Freezer Storage Database</h2>
-							<br><a href='storage/vat_view.php'>View Storage Vats</a>
+						echo "<br><br><h2>Freezer Database</h2>
+							<a href='storage/vat_view.php'>view storage vats</a>
 						";
 					}
 				?>

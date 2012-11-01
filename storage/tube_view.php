@@ -81,7 +81,7 @@
 											
 											// If no result
 											if (mysql_num_rows($result) == 0) {
-												echo "No Record";
+												echo "<span class='emptyEmphasis'>No Record</span>";
 											
 											// If result
 											} else {

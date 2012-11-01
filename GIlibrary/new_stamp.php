@@ -113,7 +113,7 @@
 								<input type='submit' value='Submit to Database'></input>
 							</form>";
 					} else {
-						echo "<h1>Sorry; no plate matched your query!</h1><br><img src='./images/sad-puppy.jpg' style='margin-left:280px'>";
+						echo "<h1>Sorry; no plate matched your query!</h1><br><img src='../images/sad-puppy.jpg' style='margin-left:280px'>";
 					}
 				}
 			?>
