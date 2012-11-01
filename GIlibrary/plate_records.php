@@ -39,10 +39,10 @@
 						
 						echo "<div class='plateSmall' style='margin: 0 auto;'>";
 						
-						$query = "SELECT library.well_position, library.clone, library.gene
+						$query = "SELECT well_position, clone, gene
 							FROM library
-							WHERE library.plate_id = '$search_term'
-							ORDER BY library.well_position
+							WHERE plate_id = '$search_term'
+							ORDER BY well_position
 						";
 
 						$result = mysql_query($query);
@@ -132,8 +132,8 @@
 										LEFT JOIN library
 										ON library.well_position = stamps.well_position 
 											AND library.plate_id = stamps.plate_id
-										WHERE stamps.date = '$date' 
-											AND stamps.plate_id = '$plate_id' 
+										WHERE stamps.plate_id = '$plate_id'
+											AND stamps.date = '$date' 
 											AND stamps.source_id = '$source_id'
 										ORDER BY stamps.well_position
 									";
