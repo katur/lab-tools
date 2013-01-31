@@ -380,20 +380,3 @@ div#storage table {
 div#storage a {
 	text-decoration: none;
 }
-
-div#mom {
-	background: #F00;
-	width: 960px;
-	margin: 0 auto;
-	overflow: auto;
-}
-
-div#mom img {
-	margin-left: 80px;
-}
-
-div#mom h1 {
-	color: #59FF04;
-	font-size: 45px;
-	padding-top: 20px;
-}
