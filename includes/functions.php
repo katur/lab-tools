@@ -21,7 +21,7 @@
 	    returns wormbase link as string. */
 	    
 	function generate_wormbase($strain) {
-		return preg_replace('/strain_fill/', $strain, 'http://wormbase.org/species/c_elegans/strain/strain_fill#01--9');
+	    return preg_replace('/strain_fill/', $strain, 'http://wormbase.org/species/c_elegans/strain/strain_fill#01--9');	
 	}
 	
 	

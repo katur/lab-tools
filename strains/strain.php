@@ -94,6 +94,16 @@
 							</div>";
 						}
 						
+						if (preg_match('/fx/i', $strain)) { /* i indicates case-insensitive */
+                	        $sub_strain = substr($strain,2);
+                	        $mitani_url = preg_replace('/strain_fill/', $sub_strain,	     'http://www.shigen.nig.ac.jp/c.elegans/mutants/DetailsSearch?lang=english&seq=strain_fill');
+                	        echo "<div class='strainData'>
+								<a href='" . $mitani_url . "' target='_blank'>
+									See strain on NBP website
+								</a>
+							</div>";
+                	    }
+						
 						if ($genotype != NULL) {
 							echo "<div class='strainData'><b>Genotype:</b>&nbsp;$genotype</div>";
 						}
@@ -161,6 +171,7 @@
 						LEFT JOIN authors
 							ON authors.id = storage_tube_ref.frozen_by
 						WHERE storage_tube_ref.strain_id = '$strain_id'
+						AND storage_tube.thawed = '0'
 					";
 		
 					$result = mysql_query($query);
