@@ -1,4 +1,4 @@
-DEPRECATED gunsiano lab tools
+Gunsiano Lab Organizational Tools
 ===
 
 Online tools for visualizing and tracking growth of bacteria libraries,
