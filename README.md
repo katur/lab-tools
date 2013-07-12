@@ -1,7 +1,7 @@
-DEPRECATED gunsiano lab tools website
+DEPRECATED gunsiano lab tools
 ===
 
-Tools for visualizing and tracking growth of bacteria libraries,
+Online tools for visualizing and tracking growth of bacteria libraries,
 managing lab storage,
 and managing lab worm strains.
 
