@@ -50,9 +50,8 @@
 					// if session variable 'logged in' IS present, allow user to 
 					//search strain DB, view all strains, or search RNAi plates.  
 					} else {
-						echo "<h2>Worm Strain Database</h2>";						
-						include("includes/strain_search_form.php");
-						echo "<br><a href='strains/strains.php'>view all strains</a>";
+						echo "The strain and freezer databases are no longer stored here. Please go to the new lab website:";
+						echo ' <a href="http://gunsiano.webfactional.com">gunsiano.webfactional.com</a>';
 					
 						echo "<br><br><br><h2>Ahringer RNAi Library Database (96-well format)</h2>";
 						include("includes/clone_search_form.php");
@@ -66,10 +65,6 @@
 						if ($_SESSION["admin"] == 1) {
 							include("includes/new_stamp_search_form.php");
 						}
-					
-						echo "<br><br><h2>Freezer Database</h2>
-							<a href='storage/vat_view.php'>view storage vats</a>
-						";
 					}
 				?>
 			</div>
