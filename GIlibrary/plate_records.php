@@ -1,3 +1,4 @@
+<?php include($_SERVER["DOCUMENT_ROOT"] . "/includes/global.php"); ?>
 <!-- Copyright (c) 2010-2012 Katherine Erickson -->
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">

@@ -1,6 +1,4 @@
 <!-- Copyright (c) 2010-2012 Katherine Erickson -->
-
-<?php include($_SERVER["DOCUMENT_ROOT"] . "/includes/global.php"); ?>
 <head>
 	<title>Piano Lab Tools</title>
 	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
