@@ -54,11 +54,6 @@
 						include("includes/strain_search_form.php");
 						echo "<br><a href='strains/strains.php'>view all strains</a>";
 					
-						// if admin, allow to add new RNAi stamp data.
-						if ($_SESSION["admin"] == 1) {
-							echo "<br><br><a href='/strains/new_strain.php'>add new strain</a>";
-						}
-
 						echo "<br><br><br><h2>Ahringer RNAi Library Database (96-well format)</h2>";
 						include("includes/clone_search_form.php");
 						echo "<br>";
