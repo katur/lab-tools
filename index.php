@@ -51,8 +51,8 @@
 					// if session variable 'logged in' IS present, allow user to 
 					//search strain DB, view all strains, or search RNAi plates.  
 					} else {
-						echo "The strain and freezer databases are no longer stored here. Please go to the new lab website:";
-						echo ' <a href="http://gunsiano.webfactional.com">gunsiano.webfactional.com</a>';
+						echo "The strain and freezer databases are no longer maintained here. Please visit";
+						echo ' <a href="http://gunsiano.webfactional.com">the new lab website</a>.';
 					
 						echo "<br><br><br><h2>Ahringer RNAi Library Database (96-well format)</h2>";
 						include("includes/clone_search_form.php");
