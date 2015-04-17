@@ -1,3 +1,4 @@
+<?php include($_SERVER["DOCUMENT_ROOT"] . "/includes/global.php"); ?>
 <!-- Copyright (c) 2010-2012 Katherine Erickson -->
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
@@ -50,15 +51,9 @@
 					// if session variable 'logged in' IS present, allow user to 
 					//search strain DB, view all strains, or search RNAi plates.  
 					} else {
-						echo "<h2>Worm Strain Database</h2>";						
-						include("includes/strain_search_form.php");
-						echo "<br><a href='strains/strains.php'>view all strains</a>";
+						echo "The strain and freezer databases are no longer maintained here. Please visit";
+						echo ' <a href="http://gunsiano.webfactional.com">the new lab website</a>.';
 					
-						// if admin, allow to add new RNAi stamp data.
-						if ($_SESSION["admin"] == 1) {
-							echo "<br><br><a href='/strains/new_strain.php'>add new strain</a>";
-						}
-
 						echo "<br><br><br><h2>Ahringer RNAi Library Database (96-well format)</h2>";
 						include("includes/clone_search_form.php");
 						echo "<br>";
@@ -71,10 +66,6 @@
 						if ($_SESSION["admin"] == 1) {
 							include("includes/new_stamp_search_form.php");
 						}
-					
-						echo "<br><br><h2>Freezer Database</h2>
-							<a href='storage/vat_view.php'>view storage vats</a>
-						";
 					}
 				?>
 			</div>
