@@ -12,8 +12,8 @@
 				}
 			?>
 			<div id="indexContainer">
-			
-				<h1>Katherine's Piano Lab Tools</h1>
+
+				<h1>RNAi Growth History</h1>
 				<br>
 				<br>
 				<?php
@@ -22,7 +22,7 @@
 						echo "Invalid Login Credentials";
 						unset($_SESSION["login_error"]);
 					}
-				
+
 					// if session variable 'logged in' is NOT present, allow user to try logging in //
 					if (!$_SESSION["logged_in"]) {
 				?>
@@ -46,14 +46,14 @@
 							</table>
 							<br><input type="submit" value="Login"></input>
 						</form>
-					
+
 				<?php
-					// if session variable 'logged in' IS present, allow user to 
-					//search strain DB, view all strains, or search RNAi plates.  
+					// if session variable 'logged in' IS present, allow user to
+					//search strain DB, view all strains, or search RNAi plates.
 					} else {
 						echo "The strain and freezer databases are no longer maintained here. Please visit";
 						echo ' <a href="http://gunsiano.webfactional.com">the new lab website</a>.';
-					
+
 						echo "<br><br><br><h2>Ahringer RNAi Library Database (96-well format)</h2>";
 						include("includes/clone_search_form.php");
 						echo "<br>";
@@ -61,7 +61,7 @@
 						echo "<br>";
 						include("includes/plate_search_form.php");
 						echo "<br>";
-						
+
 						// if admin, allow to add new RNAi stamp data.
 						if ($_SESSION["admin"] == 1) {
 							include("includes/new_stamp_search_form.php");
