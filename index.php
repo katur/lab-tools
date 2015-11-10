@@ -52,7 +52,7 @@
 					//search strain DB, view all strains, or search RNAi plates.
 					} else {
 						echo "The strain and freezer databases are no longer maintained here. Please visit";
-						echo ' <a href="http://gunsiano.webfactional.com">the new lab website</a>.';
+						echo ' <a href="http://gunsaluspiano.bio.nyu.edu">the new lab website</a>.';
 
 						echo "<br><br><br><h2>Ahringer RNAi Library Database (96-well format)</h2>";
 						include("includes/clone_search_form.php");
